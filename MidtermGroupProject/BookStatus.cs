@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace MidtermGroupProject
 {
-    public enum BookStatus
+    public class BookStatus
     {
-        OnShelf,
-        CheckedOut,
-        Late,
-        Reserved
+        public enum BookStatuses
+        {
+            OnShelf,
+            CheckedOut,
+            Late,
+            Reserved
+        }
     }
 }
+    
+  
