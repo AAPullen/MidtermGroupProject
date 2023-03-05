@@ -16,7 +16,7 @@ namespace MidtermGroupProject
             List<Book> matchingBooks = new List<Book>();
             foreach (Book book in books)
             {
-                if (book.Author == author) // need to fix this to work with the books class. still tbd
+                if (book.Author == author) 
                 {
                     matchingBooks.Add(book);
                 }
@@ -30,7 +30,7 @@ namespace MidtermGroupProject
                 Console.WriteLine("We have the following book(s) in our library collection by: " +  author);
                 foreach (Book book in matchingBooks)
                 {
-                    Console.WriteLine(book.Title); // need to fix this to work with the books class. still tbd
+                    Console.WriteLine(book.Title);
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace MidtermGroupProject
             List<Book> matchingBooks = new List<Book>();
             foreach (Book book in books)
             {
-                if (book.Title.ToLower().Contains(keyword.ToLower())) // need to fix this to work with the books class. still tbd
+                if (book.Title.ToLower().Contains(keyword.ToLower())) 
                 {
                     matchingBooks.Add(book);
                 }
