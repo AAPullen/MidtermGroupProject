@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MidtermGroupProject.BookStatus;
 
 namespace MidtermGroupProject
 {
@@ -11,14 +12,15 @@ namespace MidtermGroupProject
         public string Title { get; set; }
         public string Author { get; set; }
         public DateTime DueDate { get; set; }
-        //public enum Status { get; set; }  --> This is giving me an error for some reason and I need to try to figure out why
-     
-        
-        public Book(string _Title, string _Author, DateTime _DueDate)
+        public BookStatuses Status { get; set; }
+
+
+        public Book(string _Title, string _Author, DateTime _DueDate, BookStatuses _Status)
         {
             Title = _Title;
             Author = _Author;
             DueDate = _DueDate;
+            Status = _Status;
         }
 
 
