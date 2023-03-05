@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using MidtermGroupProject;
+using MidtermGroupProject;
 
 // book list class so I can create a list of the 12 books  --> Extra credit will go to storing it eventually in a text file and reading it from there // writing to it?
 
@@ -18,6 +17,4 @@ BookList.Add(new Book("HEART BONES", "Colleen Hoover", DateTime.Now));
 BookList.Add(new Book("ALL ABOUT LOVE", "Bell Hooks", DateTime.Now));
 BookList.Add(new Book("BRAIDING SWEETGRASS", "Robin Wall Kimmerer", DateTime.Now));
 BookList.Add(new Book("CASTE", "Isabel Wilkerson", DateTime.Now));
-=======
-﻿
->>>>>>> 4bdb50a9bcf813d4ee309ea2d2663366763f53fc
+
