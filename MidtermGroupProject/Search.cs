@@ -46,14 +46,14 @@ namespace MidtermGroupProject
             }
             if (matchingBooks.Count == 0)
             {
-                Console.WriteLine("No books with '{0}' in the title found in the library.", keyword);
+                Console.WriteLine("No books found in the library with the title of" + keyword);
             }
             else
             {
-                Console.WriteLine("Books with '{0}' in the title:", keyword);
+                Console.WriteLine("We have the following books: ");
                 foreach (Book book in matchingBooks)
                 {
-                    Console.WriteLine("{0} by {1}", book.Title, book.Author); 
+                    Console.WriteLine(, book.Title, book.Author); 
                 }
             }
         }
