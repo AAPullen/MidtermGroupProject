@@ -53,7 +53,7 @@ namespace MidtermGroupProject
                 Console.WriteLine("We have the following books: ");
                 foreach (Book book in matchingBooks)
                 {
-                    Console.WriteLine(, book.Title, book.Author); 
+                    Console.WriteLine(book.Title, book.Author); 
                 }
             }
         }
