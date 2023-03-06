@@ -13,6 +13,7 @@ namespace MidtermGroupProject
         public string Author { get; set; }
         public DateTime DueDate { get; set; }
         public BookStatuses Status { get; set; }
+        
 
 
         public Book(string _Title, string _Author, DateTime _DueDate, BookStatuses _Status)
