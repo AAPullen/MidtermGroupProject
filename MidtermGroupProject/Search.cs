@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace MidtermGroupProject
 {
     internal class Search
     {
-        private List<Book> books;
 
-        public void SearchByAuthor(string author) // I have this as a void for now since its returning text to the console. maybe this should return a list?
+        public void SearchByAuthor(List<Book> Book,  string author) // I have this as a void for now since its returning text to the console. maybe this should return a list?
         {
             List<Book> matchingBooks = new List<Book>();
-            foreach (Book book in books)
+            foreach (Book book in Book)
             {
                 if (book.Author == author) 
                 {
@@ -34,10 +32,10 @@ namespace MidtermGroupProject
                 }
             }
         }
-        public void SearchByTitle(string keyword) // I have this as a void for now since its returning text to the console. maybe this should return a list?
+        public void SearchByTitle(List<Book> Book, string keyword) // I have this as a void for now since its returning text to the console. maybe this should return a list?
         {
             List<Book> matchingBooks = new List<Book>();
-            foreach (Book book in books)
+            foreach (Book book in Book)
             {
                 if (book.Title.ToLower().Contains(keyword.ToLower())) 
                 {
