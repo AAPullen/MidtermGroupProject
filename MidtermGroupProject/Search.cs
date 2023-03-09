@@ -14,7 +14,7 @@ namespace MidtermGroupProject
             List<Book> matchingBooks = new List<Book>();
             foreach (Book book in Book)
             {
-                if (book.Author == author)
+                if (book.Author.ToLower() == author)
                 {
                     matchingBooks.Add(book);
                 }
