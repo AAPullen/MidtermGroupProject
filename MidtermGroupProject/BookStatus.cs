@@ -12,8 +12,6 @@ namespace MidtermGroupProject
         {
             OnShelf,
             CheckedOut,
-            Late,
-            Reserved
         }
     }
 }
