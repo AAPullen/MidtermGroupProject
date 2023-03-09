@@ -9,6 +9,7 @@ namespace MidtermGroupProject
 {
     public class Book
     {
+        public string Id { get; set; } 
         public string Title { get; set; }
         public string Author { get; set; }
         public DateTime DueDate { get; set; }
@@ -16,8 +17,9 @@ namespace MidtermGroupProject
         
 
 
-        public Book(string _Title, string _Author, DateTime _DueDate, BookStatuses _Status)
+        public Book(string _Id, string _Title, string _Author, DateTime _DueDate, BookStatuses _Status)
         {
+            Id = _Id;
             Title = _Title;
             Author = _Author;
             DueDate = _DueDate;

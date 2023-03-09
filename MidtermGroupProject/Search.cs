@@ -9,7 +9,7 @@ namespace MidtermGroupProject
     public class Search
     {
 
-        public List<Book> SearchByAuthor(List<Book> Book, string author) 
+        public static List<Book> SearchByAuthor(List<Book> Book, string author) 
         {
             List<Book> matchingBooks = new List<Book>();
             foreach (Book book in Book)
@@ -21,7 +21,7 @@ namespace MidtermGroupProject
             }
             return matchingBooks; 
         }
-        public List<Book> SearchByTitle(List<Book> Book, string keyword) 
+        public static List<Book> SearchByTitle(List<Book> Book, string keyword) 
         {
             List<Book> matchingBooks = new List<Book>();
             foreach (Book book in Book)
