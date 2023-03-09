@@ -20,11 +20,5 @@ namespace MidtermGroupProject
             book.Status = BookStatus.BookStatuses.OnShelf;
             book.DueDate = DateTime.Now;
         }
-
-        public static void Reserve(Book book)
-        {
-            book.Status = BookStatus.BookStatuses.Reserved;
-            book.DueDate = DateTime.Now.AddDays(7);
-        }
     }
 }
