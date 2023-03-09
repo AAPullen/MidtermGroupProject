@@ -29,21 +29,11 @@ BookList.Add(new Book("13", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatu
 Console.WriteLine("Hello and welcome to ____ Library");
 var userInput = "";
 
-do
-{
-    Console.Write("Enter (1) Search for a book, (2) Return a book, or (3) To exit: ");
-    userInput = Console.ReadLine();
-    if (userInput != "1" && userInput != "2" && userInput != "3")
-    {
-        Console.WriteLine("That is not a valid option.");
-    }
-} while (userInput != "1" && userInput != "2" && userInput != "3");
-
-if (userInput == "1")
+while (true)
 {
     do
     {
-        Console.Write("Please select from the following: Enter (1) To Search By Title, Enter (2) To Search By Author, Or Enter (3) To Pick From a List: ");
+        Console.Write("Enter (1) Search for a book, (2) Return a book, or (3) To exit: ");
         userInput = Console.ReadLine();
         if (userInput != "1" && userInput != "2" && userInput != "3")
         {
@@ -51,81 +41,116 @@ if (userInput == "1")
         }
     } while (userInput != "1" && userInput != "2" && userInput != "3");
 
-    string titleChosen;
     if (userInput == "1")
     {
-        Console.Write("Please enter the Title you would like to search: ");
-        titleChosen = Console.ReadLine();
-
-
-        List<Book> matchingBook = Search.SearchByTitle(BookList, titleChosen);
-        foreach (var bookreturned in matchingBook)
+        do
         {
-            Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
-        }
-
-        if (matchingBook.Count > 0)
-        {
-            Console.Write("Please choose a book by entering the Id number here: ");
-            string IdChosen = Console.ReadLine();
-
-            if (matchingBook.Any(book => book.Id == IdChosen && book.Status == BookStatus.BookStatuses.OnShelf))
+            Console.Write("Please select from the following: Enter (1) To Search By Title, Enter (2) To Search By Author, Or Enter (3) To Pick From a List: ");
+            userInput = Console.ReadLine();
+            if (userInput != "1" && userInput != "2" && userInput != "3")
             {
-                int BookToUpdate = int.Parse(IdChosen) - 1;
-                Book BookChosen = BookList[BookToUpdate];
-                CheckoutReturn.CheckOut(BookChosen);
-                Console.WriteLine($"You checked out {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}. The due date is {BookList[BookToUpdate].DueDate}");
+                Console.WriteLine("That is not a valid option.");
             }
-        }
-        else Console.WriteLine("There are no books availble by that title");
-    }
+        } while (userInput != "1" && userInput != "2" && userInput != "3");
 
-
-    else if (userInput == "2")
-    {
-        string authorChosen;
-        Console.Write("Please enter the name of the author you would like to search: ");
-        authorChosen = Console.ReadLine();
-
-
-        List<Book> matchingAuthor = Search.SearchByAuthor(BookList, authorChosen);
-        foreach (var bookreturned in matchingAuthor)
+        string titleChosen;
+        if (userInput == "1")
         {
-            Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
-        }
+            Console.Write("Please enter the Title you would like to search: ");
+            titleChosen = Console.ReadLine();
 
-        if (matchingAuthor.Count > 0)
-        {
-            Console.Write("Please choose a book by entering the Id number here: ");
-            string IdChosen = Console.ReadLine();
 
-            if (matchingAuthor.Any(book => book.Id == IdChosen && book.Status == BookStatus.BookStatuses.OnShelf))
+            List<Book> matchingBook = Search.SearchByTitle(BookList, titleChosen);
+            foreach (var bookreturned in matchingBook)
             {
-                int BookToUpdate = int.Parse(IdChosen) - 1;
+                Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
+            }
+
+            if (matchingBook.Count > 0)
+            {
+                Console.Write("Please choose a book by entering the Id number here: ");
+                string IdChosen = Console.ReadLine();
+
+                if (matchingBook.Any(book => book.Id == IdChosen && book.Status == BookStatus.BookStatuses.OnShelf))
+                {
+                    int BookToUpdate = int.Parse(IdChosen) - 1;
+                    Book BookChosen = BookList[BookToUpdate];
+                    CheckoutReturn.CheckOut(BookChosen);
+                    Console.WriteLine($"You checked out {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}. The due date is {BookList[BookToUpdate].DueDate}");
+                }
+                else
+                {
+                    Console.WriteLine("I'm Sorry, that book is currently checked out.");
+                }
+            }
+            else Console.WriteLine("There are no books availble by that title");
+        }
+
+
+        else if (userInput == "2")
+        {
+            string authorChosen;
+            Console.Write("Please enter the name of the author you would like to search: ");
+            authorChosen = Console.ReadLine();
+
+
+            List<Book> matchingAuthor = Search.SearchByAuthor(BookList, authorChosen);
+            foreach (var bookreturned in matchingAuthor)
+            {
+                Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
+            }
+
+            if (matchingAuthor.Count > 0)
+            {
+                Console.Write("Please choose a book by entering the Id number here: ");
+                string IdChosen = Console.ReadLine();
+
+                if (matchingAuthor.Any(book => book.Id == IdChosen && book.Status == BookStatus.BookStatuses.OnShelf))
+                {
+                    int BookToUpdate = int.Parse(IdChosen) - 1;
+                    Book BookChosen = BookList[BookToUpdate];
+                    CheckoutReturn.CheckOut(BookChosen);
+                    Console.WriteLine($"You checkout out {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}. The due date is {BookList[BookToUpdate].DueDate}");
+                }
+                else
+                {
+                    Console.WriteLine("I'm Sorry, that book is currently checked out.");
+                }
+            }
+            else Console.WriteLine("There are no books availble by that author");
+        }
+        else if (userInput == "3")
+        {
+            Console.WriteLine("Please select the Id number of the book from the following list that you would like to checkout.");
+            foreach (var book in BookList)
+            {
+                Console.WriteLine($"{book.Id}: {book.Title} by {book.Author}");
+            }
+            Console.Write("Please Enter your selection: ");
+            string IdChosen = Console.ReadLine();
+            int BookToUpdate = int.Parse(IdChosen) - 1;
+
+            if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.OnShelf)
+            {
                 Book BookChosen = BookList[BookToUpdate];
                 CheckoutReturn.CheckOut(BookChosen);
                 Console.WriteLine($"You checkout out {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}. The due date is {BookList[BookToUpdate].DueDate}");
             }
+            else
+            {
+                Console.WriteLine("I'm Sorry, that book is currently checked out.");
+            }
         }
-        else Console.WriteLine("There are no books availble by that author");
     }
-    else if (userInput == "3")
+    else if (userInput == "2")
     {
-        Console.WriteLine("Please select the Id number of the book from the following list that you would like to checkout.");
-        foreach (var book in BookList)
-        {
-            Console.WriteLine($"{book.Id}: {book.Title} by {book.Author}");
-        }
-        Console.Write("Please Enter your selection: ");
-        string IdChosen = Console.ReadLine();
-        int BookToUpdate = int.Parse(IdChosen) - 1;
-
-        if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.OnShelf)
-        {
-            Book BookChosen = BookList[BookToUpdate];
-            CheckoutReturn.CheckOut(BookChosen);
-            Console.WriteLine($"You checkout out {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}. The due date is {BookList[BookToUpdate].DueDate}");
-        }
+        //return function
     }
-}
+    else
+    {
+        Console.WriteLine("Thank you for visiting the Library. Goodbye!");
+        break;
+    }
 
+    Console.WriteLine("Please select another option.");
+}
