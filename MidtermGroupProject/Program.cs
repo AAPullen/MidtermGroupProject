@@ -109,12 +109,22 @@ if (userInput == "1")
         }
         else Console.WriteLine("There are no books availble by that author");
     }
-     else if (userInput == "3")
+    else if (userInput == "3")
     {
-        Console.WriteLine("test");
+        Console.WriteLine("Please select the Id number of the book from the following list that you would like to checkout.");
         foreach (var book in BookList)
         {
-            Console.WriteLine(book);
+            Console.WriteLine($"{book.Id}: {book.Title} by {book.Author}");
+        }
+        Console.Write("Please Enter your selection: ");
+        string IdChosen = Console.ReadLine();
+        int BookToUpdate = int.Parse(IdChosen) - 1;
+
+        if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.OnShelf)
+        {
+            Book BookChosen = BookList[BookToUpdate];
+            CheckoutReturn.CheckOut(BookChosen);
+            Console.WriteLine($"You checkout out {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}. The due date is {BookList[BookToUpdate].DueDate}");
         }
     }
 }
