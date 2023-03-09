@@ -74,13 +74,16 @@ if (userInput == "1")
                 string BookToUpdate = IdChosen;
                 Book BookChosen = BookList[(int.Parse(BookToUpdate)) - 1];
                 CheckoutReturn.CheckOut(BookChosen);
+                Console.WriteLine(BookChosen.Status);
             }
         }
-        Console.WriteLine("There are no books availble by that title");
+        else Console.WriteLine("There are no books availble by that title");
     }
-    string authorChosen;
-    if (userInput == "2")
+
+
+    else if (userInput == "2")
     {
+        string authorChosen;
         Console.WriteLine("Please enter the name of the author you would like to search: ");
         authorChosen = Console.ReadLine();
 
@@ -101,16 +104,17 @@ if (userInput == "1")
                 string BookToUpdate = IdChosen;
                 Book BookChosen = BookList[(int.Parse(BookToUpdate)) - 1];
                 CheckoutReturn.CheckOut(BookChosen);
+                Console.WriteLine(BookChosen.Status);
             }
         }
-        Console.WriteLine("There are no books availble by that author");
+        else Console.WriteLine("There are no books availble by that author");
     }
-    if (userInput == "3")
+     else if (userInput == "3")
     {
         Console.WriteLine("test");
         foreach (var book in BookList)
         {
-            Console.WriteLine(book.Id);
+            Console.WriteLine(book);
         }
     }
 }
