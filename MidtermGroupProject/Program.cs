@@ -24,9 +24,11 @@ BookList.Add(new Book("ID: 009", "IT ENDS WITH US", "Colleen Hoover", DateTime.N
 BookList.Add(new Book("ID: 010", "HEART BONES", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
 BookList.Add(new Book("ID: 011", "ALL ABOUT LOVE", "Bell Hooks", DateTime.Now, BookStatus.BookStatuses.OnShelf));
 BookList.Add(new Book("ID: 012", "BRAIDING SWEETGRASS", "Robin Wall Kimmerer", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 013", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 013", "LIBRARY OF ALEXANDRIA", "Julius Caesar", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 014", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatus.BookStatuses.OnShelf));
 
 CheckoutReturn.CheckOut(BookList[0]);
+CheckoutReturn.CheckOut(BookList[1]);
 
 Console.WriteLine("Hello and welcome to McWhitLen Library\n"); // we need a library name still
 var userInput = "";
@@ -71,9 +73,28 @@ while (true)
 
             if (matchingBook.Count > 0)
             {
-                Console.Write($"\nPlease choose a book by entering the Id number here: ");
-                string IdChosen = Console.ReadLine();
-                int BookToUpdate = int.Parse(IdChosen) - 1;
+                bool validInput = false;
+                int BookToUpdate = 0;
+                do
+                {
+                    Console.Write($"\nPlease choose a book by entering the Id number here: ");
+                    string IdChosen = Console.ReadLine();
+
+                        
+                        BookToUpdate = int.Parse(IdChosen) - 1;
+                        if (BookToUpdate <= BookList.Count)
+                        {
+                            validInput = true;
+                        }
+
+                        Console.WriteLine("\nThat is not a valid option");
+                        foreach (var bookreturned in matchingBook)
+                        {
+                            Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
+                        }
+
+                } while (validInput == false);
+                
 
                 if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.OnShelf)
                 {
@@ -154,6 +175,11 @@ while (true)
 
         foreach (var book in BookList)
         {
+            if (book.Title == "LIBRARY OF ALEXANDRIA")
+            {
+                /// BURN IT DOWN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            }
+
             if (book.Status == BookStatus.BookStatuses.CheckedOut)
             {
 
