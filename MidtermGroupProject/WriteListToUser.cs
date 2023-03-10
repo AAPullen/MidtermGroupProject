@@ -12,8 +12,7 @@ namespace MidtermGroupProject
         {
             foreach (var book in Book)
             {
-              Console.WriteLine($"{book.Id}:  {book.Title} by {book.Author}\n");
-
+              Console.WriteLine($"{book.Id}:  {book.Title} by {book.Author}");
             }
         }
     }
