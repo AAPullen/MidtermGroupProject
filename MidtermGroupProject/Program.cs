@@ -26,7 +26,7 @@ BookList.Add(new Book("ID: 011", "ALL ABOUT LOVE", "Bell Hooks", DateTime.Now, B
 BookList.Add(new Book("ID: 012", "BRAIDING SWEETGRASS", "Robin Wall Kimmerer", DateTime.Now, BookStatus.BookStatuses.OnShelf));
 BookList.Add(new Book("ID: 013", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatus.BookStatuses.OnShelf));
 
-Console.WriteLine("Hello and welcome to ____ Library");
+Console.WriteLine("Hello and welcome to ____ Library"); // we need a library name still
 var userInput = "";
 
 while (true)
