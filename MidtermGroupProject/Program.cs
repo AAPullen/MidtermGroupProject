@@ -77,22 +77,39 @@ while (true)
                 int BookToUpdate = 0;
                 do
                 {
-                    Console.Write($"\nPlease choose a book by entering the Id number here: ");
-                    string IdChosen = Console.ReadLine();
-
-                        
-                        BookToUpdate = int.Parse(IdChosen) - 1;
-                        if (BookToUpdate <= BookList.Count)
-                        {
-                            validInput = true;
-                        }
-
-                        Console.WriteLine("\nThat is not a valid option");
+                    
+                    try
+                    {
                         foreach (var bookreturned in matchingBook)
                         {
                             Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
                         }
+                        Console.Write($"\nPlease choose a book by entering the Id number here: ");
+                        string IdChosen = Console.ReadLine();
 
+                        BookToUpdate = int.Parse(IdChosen) - 1;
+                        if (BookToUpdate <= BookList.Count -1)
+                        {
+                            validInput = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nThat is not a valid option");
+                            //foreach (var bookreturned in matchingBook)
+                            //{
+                            //    Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
+                            //}
+                        }
+                        
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("\nThat is not a valid option");
+                        //foreach (var bookreturned in matchingBook)
+                        //{
+                        //    Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
+                        //}
+                    } 
                 } while (validInput == false);
                 
 
