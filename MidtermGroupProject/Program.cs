@@ -58,60 +58,22 @@ while (true)
             }
         } while (userInput != "1" && userInput != "2" && userInput != "3");
 
-        string titleChosen;
+ 
         if (userInput == "1")
         {
+            string titleChosen;
             Console.Write($"\nPlease enter the Title you would like to search: ");
             titleChosen = Console.ReadLine();
 
 
             List<Book> matchingBook = Search.SearchByTitle(BookList, titleChosen);
-            foreach (var bookreturned in matchingBook)
-            {
-                Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
-            }
+            WriteListToUser.WriteListToConsole(matchingBook);
 
             if (matchingBook.Count > 0)
             {
-                bool validInput = false;
-                int BookToUpdate = 0;
-                do
-                {
-                    
-                    try
-                    {
-                        foreach (var bookreturned in matchingBook)
-                        {
-                            Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
-                        }
-                        Console.Write($"\nPlease choose a book by entering the Id number here: ");
-                        string IdChosen = Console.ReadLine();
-
-                        BookToUpdate = int.Parse(IdChosen) - 1;
-                        if (BookToUpdate <= BookList.Count -1)
-                        {
-                            validInput = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nThat is not a valid option");
-                            //foreach (var bookreturned in matchingBook)
-                            //{
-                            //    Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
-                            //}
-                        }
-                        
-                    }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("\nThat is not a valid option");
-                        //foreach (var bookreturned in matchingBook)
-                        //{
-                        //    Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}");
-                        //}
-                    } 
-                } while (validInput == false);
-                
+                Console.Write($"\nPlease choose a book by entering the Id number here: ");
+                string IdChosen = Console.ReadLine();
+                int BookToUpdate = int.Parse(IdChosen) - 1;
 
                 if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.OnShelf)
                 {
@@ -136,16 +98,12 @@ while (true)
 
 
             List<Book> matchingAuthor = Search.SearchByAuthor(BookList, authorChosen);
-            foreach (var bookreturned in matchingAuthor)
-            {
-                Console.WriteLine($"{bookreturned.Id}:  {bookreturned.Title} by {bookreturned.Author}\n");
-            }
+            WriteListToUser.WriteListToConsole(matchingAuthor);
 
             if (matchingAuthor.Count > 0)
             {
                 Console.Write("Please choose a book by entering the Id number here: \n");
                 string IdChosen = Console.ReadLine();
-
                 int BookToUpdate = int.Parse(IdChosen) - 1;
 
                 if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.OnShelf)
