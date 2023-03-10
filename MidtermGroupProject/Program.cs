@@ -12,19 +12,19 @@ using System.Numerics;
 List<Book> BookList = new List<Book>();
 
 
-BookList.Add(new Book("1","IT STARTS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("2", "LESSONS IN CHEMISTRY", "Bonnie Garmus", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("3", "BURNER", "Mark Greaney", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("4", "SPARE", "Prince Harry", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("5", "THE LIGHT WE CARRY", "Michelle Obama", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("6", "TOMORROW, AND TOMORROW, AND TOMORROW", "Gabrielle Zevin", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("7", "I HAVE SOME QUESTIONS FOR YOU", "Rebecca Makkai", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("8", "SOMEONE ELSE'S SHOES", "Jojo Moyes", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("9", "IT ENDS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("10", "HEART BONES", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("11", "ALL ABOUT LOVE", "Bell Hooks", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("12", "BRAIDING SWEETGRASS", "Robin Wall Kimmerer", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("13", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 001","IT STARTS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.CheckedOut));
+BookList.Add(new Book("ID: 002", "LESSONS IN CHEMISTRY", "Bonnie Garmus", DateTime.Now, BookStatus.BookStatuses.CheckedOut));
+BookList.Add(new Book("ID: 003", "BURNER", "Mark Greaney", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 004", "SPARE", "Prince Harry", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 005", "THE LIGHT WE CARRY", "Michelle Obama", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 006", "TOMORROW, AND TOMORROW, AND TOMORROW", "Gabrielle Zevin", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 007", "I HAVE SOME QUESTIONS FOR YOU", "Rebecca Makkai", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 008", "SOMEONE ELSE'S SHOES", "Jojo Moyes", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 009", "IT ENDS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 010", "HEART BONES", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 011", "ALL ABOUT LOVE", "Bell Hooks", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 012", "BRAIDING SWEETGRASS", "Robin Wall Kimmerer", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+BookList.Add(new Book("ID: 013", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatus.BookStatuses.OnShelf));
 
 Console.WriteLine("Hello and welcome to ____ Library");
 var userInput = "";
@@ -33,13 +33,13 @@ while (true)
 {
     do
     {
-        Console.Write("Enter (1) Search for a book, (2) Return a book, or (3) To exit: ");
+        Console.Write("Enter (1) Search for a book, (2) Return a book, (3) See a List of All Books or (4) To exit: ");
         userInput = Console.ReadLine();
-        if (userInput != "1" && userInput != "2" && userInput != "3")
+        if (userInput != "1" && userInput != "2" && userInput != "3" && userInput != "4")
         {
             Console.WriteLine("That is not a valid option.");
         }
-    } while (userInput != "1" && userInput != "2" && userInput != "3");
+    } while (userInput != "1" && userInput != "2" && userInput != "3" && userInput != "4");
 
     if (userInput == "1")
     {
@@ -105,16 +105,17 @@ while (true)
                 Console.Write("Please choose a book by entering the Id number here: ");
                 string IdChosen = Console.ReadLine();
 
+                int BookToUpdate = int.Parse(IdChosen) - 1;
+
                 if (matchingAuthor.Any(book => book.Id == IdChosen && book.Status == BookStatus.BookStatuses.OnShelf))
                 {
-                    int BookToUpdate = int.Parse(IdChosen) - 1;
                     Book BookChosen = BookList[BookToUpdate];
                     CheckoutReturn.CheckOut(BookChosen);
                     Console.WriteLine($"You checkout out {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}. The due date is {BookList[BookToUpdate].DueDate}");
                 }
                 else
                 {
-                    Console.WriteLine("I'm Sorry, that book is currently checked out.");
+                    Console.WriteLine($"I'm Sorry, that book is currently checked out. It will be due back on {BookList[BookToUpdate].DueDate}");
                 }
             }
             else Console.WriteLine("There are no books availble by that author");
@@ -138,19 +139,47 @@ while (true)
             }
             else
             {
-                Console.WriteLine("I'm Sorry, that book is currently checked out.");
+                Console.WriteLine($"I'm Sorry, that book is currently checked out. It will be available on {BookList[BookToUpdate].DueDate}");
             }
         }
     }
     else if (userInput == "2")
     {
-        //return function
+        Console.WriteLine("Please select a book from the list below by typing the corresponding ID: ");
+
+        List<Book> BooksCheckedOut = new List<Book>();
+
+        foreach (var book in BookList)
+        {
+            if (book.Status == BookStatus.BookStatuses.CheckedOut)
+            {
+
+                Console.WriteLine($"{book.Id}:  {book.Title} by {book.Author} Due Date: {book.DueDate}");
+            }
+        }
+        Console.Write("Please Enter your selection: ");
+        string IdChosen = Console.ReadLine();
+        int BookToUpdate = int.Parse(IdChosen) - 1;
+
+        if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.CheckedOut)
+        {
+            Book BookChosen = BookList[BookToUpdate];
+            CheckoutReturn.Return(BookChosen);
+            Console.WriteLine($"You returned {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}.");
+        }
     }
-    else
+    else if (userInput == "3")
     {
-        Console.WriteLine("Thank you for visiting the Library. Goodbye!");
-        break;
+        foreach (var book in BookList)
+        {
+            Console.WriteLine($"{book.Id} {book.Title} By: {book.Author}");
+        }
     }
+        else  //This is option 4 Exit
+        {
+            Console.WriteLine("Thank you for visiting the Library. Goodbye!");
+            break;
+        }
 
     Console.WriteLine("Please select another option.");
 }
