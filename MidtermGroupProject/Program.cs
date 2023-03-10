@@ -28,7 +28,7 @@ BookList.Add(new Book("ID: 013", "CASTE", "Isabel Wilkerson", DateTime.Now, Book
 
 CheckoutReturn.CheckOut(BookList[0]);
 
-Console.WriteLine("Hello and welcome to ____ Library\n"); // we need a library name still
+Console.WriteLine("Hello and welcome to McWhitLen Library\n"); // we need a library name still
 var userInput = "";
 
 
@@ -178,11 +178,11 @@ while (true)
             Console.WriteLine($"{book.Id} {book.Title} by {book.Author}");
         }
     }
-        else  //This is option 4 Exit
-        {
-            Console.WriteLine("\nThank you for visiting the Library. Goodbye!");
-            break;
-        }
+    else  //This is option 4 Exit
+    {
+        Console.WriteLine("\nThank you for visiting the McWhitLen Library. Goodbye!");
+        break;
+    }
 
     Console.WriteLine("\nPlease select another option.\n");
 }
