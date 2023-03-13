@@ -264,13 +264,57 @@ while (true)
         }
         Console.Write("\nPlease enter your selection: ");
         string IdChosen = Console.ReadLine();
-        int BookToUpdate = int.Parse(IdChosen) - 1;
+        int BookToUpdate = - 1;
+
+        bool isValidId = false;
+
+        do
+        {
+            try
+            {
+                BookToUpdate = int.Parse(IdChosen) - 1;
+                if (BookToUpdate > -1 && BookToUpdate < BookList.Count)
+                {
+                    isValidId = true;
+                }
+                else
+                {
+                    Console.WriteLine("\nThat is not a valid choice. Please enter a book Id from the list below.");
+                    foreach (var book in BookList)
+                    {
+                        if (book.Status == BookStatus.BookStatuses.CheckedOut)
+                        {
+
+                            Console.WriteLine($"{book.Id}:  {book.Title} by {book.Author} due date: {book.DueDate}");
+                        }
+                    }
+                    IdChosen = Console.ReadLine();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("\nThat is not a valid choice. Please enter a book Id from the list below.");
+                foreach (var book in BookList)
+                {
+                    if (book.Status == BookStatus.BookStatuses.CheckedOut)
+                    {
+
+                        Console.WriteLine($"{book.Id}:  {book.Title} by {book.Author} due date: {book.DueDate}");
+                    }
+                }
+                IdChosen = Console.ReadLine();
+            }
+        } while (isValidId == false);
 
         if (BookList[BookToUpdate].Status == BookStatus.BookStatuses.CheckedOut)
         {
             Book BookChosen = BookList[BookToUpdate];
             CheckoutReturn.Return(BookChosen);
             Console.WriteLine($"\nYou returned {BookList[BookToUpdate].Title} by {BookList[BookToUpdate].Author}.");
+        }
+        else
+        {
+            Console.WriteLine("\nThat book is already on the shelf.");
         }
     }
     else if (userInput == "3")
@@ -299,7 +343,7 @@ while (true)
         }
     }
 
-    using (StreamWriter sw = File.CreateText(@"C:\Users\billy\BookList.txt"))
+    using (StreamWriter sw = File.CreateText(@"C:\Users\andre\BookList.txt"))
 
         foreach (var s in BookList)
         {
