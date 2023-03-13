@@ -2,30 +2,51 @@
 
 using MidtermGroupProject;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using System.IO;
 using System.Numerics;
 
 
 // book list class so I can create a list of the 12 books  --> Extra credit will go to storing it eventually in a text file and reading it from there // writing to it?
 
+
 List<Book> BookList = new List<Book>();
 
+if (File.Exists(@"C:\Users\billy\BookList.txt"))
+{
+    
+    
+        using (StreamReader reader = new StreamReader(@"C:\Users\billy\BookList.txt"))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+            string[] split = line.Split("||");
+            Book BookFromFile = new Book(split[0], split[1], split[2], DateTime.Parse(split[3]), Enum.Parse<BookStatus.BookStatuses>(split[4]));
+            BookList.Add(BookFromFile);
+            }
+        }
+}
+else
+{
+    BookList.Add(new Book("ID: 001", "IT STARTS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 002", "LESSONS IN CHEMISTRY", "Bonnie Garmus", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 003", "BURNER", "Mark Greaney", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 004", "SPARE", "Prince Harry", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 005", "THE LIGHT WE CARRY", "Michelle Obama", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 006", "TOMORROW, AND TOMORROW, AND TOMORROW", "Gabrielle Zevin", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 007", "I HAVE SOME QUESTIONS FOR YOU", "Rebecca Makkai", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 008", "SOMEONE ELSE'S SHOES", "Jojo Moyes", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 009", "IT ENDS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 010", "HEART BONES", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 011", "ALL ABOUT LOVE", "Bell Hooks", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 012", "BRAIDING SWEETGRASS", "Robin Wall Kimmerer", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 013", "LIBRARY OF ALEXANDRIA", "Julius Caesar", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+    BookList.Add(new Book("ID: 014", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatus.BookStatuses.OnShelf));
+}
 
-BookList.Add(new Book("ID: 001","IT STARTS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 002", "LESSONS IN CHEMISTRY", "Bonnie Garmus", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 003", "BURNER", "Mark Greaney", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 004", "SPARE", "Prince Harry", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 005", "THE LIGHT WE CARRY", "Michelle Obama", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 006", "TOMORROW, AND TOMORROW, AND TOMORROW", "Gabrielle Zevin", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 007", "I HAVE SOME QUESTIONS FOR YOU", "Rebecca Makkai", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 008", "SOMEONE ELSE'S SHOES", "Jojo Moyes", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 009", "IT ENDS WITH US", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 010", "HEART BONES", "Colleen Hoover", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 011", "ALL ABOUT LOVE", "Bell Hooks", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 012", "BRAIDING SWEETGRASS", "Robin Wall Kimmerer", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 013", "LIBRARY OF ALEXANDRIA", "Julius Caesar", DateTime.Now, BookStatus.BookStatuses.OnShelf));
-BookList.Add(new Book("ID: 014", "CASTE", "Isabel Wilkerson", DateTime.Now, BookStatus.BookStatuses.OnShelf));
 
 //These books are checked out for demo purposes
 CheckoutReturn.CheckOut(BookList[0]);
@@ -276,8 +297,12 @@ while (true)
             Console.Write($"\rProgress: {i} %  ");
             Thread.Sleep(25);
         }
-
-        
     }
-    
+
+    using (StreamWriter sw = File.CreateText(@"C:\Users\billy\BookList.txt"))
+
+        foreach (var s in BookList)
+        {
+            sw.WriteLine(s.Id + "||" + s.Title + "||" + s.Author + "||" + s.DueDate + "||" + s.Status);
+        }
 }
