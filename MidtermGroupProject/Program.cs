@@ -66,6 +66,14 @@ while (true)
             Console.Write($"\nPlease enter the Title you would like to search: ");
             titleChosen = Console.ReadLine();
 
+            if (titleChosen == "LIBRARY OF ALEXANDRIA")
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Black;
+                ShowSimplePercentage();
+                Console.WriteLine("\n\n!!!!!!!!! \n\n OH NO! \n\n\n YOU JUST BURNED DOWN THE LIBRARY OF ALEXANDRIA!!!!!!! \n\n\nHOW DARE THEE!!!!!!!!");
+                break;
+            }
 
             List<Book> matchingBook = Search.SearchByTitle(BookList, titleChosen);
             WriteListToUser.WriteListToConsole(matchingBook);
@@ -227,11 +235,6 @@ while (true)
 
         foreach (var book in BookList)
         {
-            if (book.Title == "LIBRARY OF ALEXANDRIA")
-            {
-                /// BURN IT DOWN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            }
-
             if (book.Status == BookStatus.BookStatuses.CheckedOut)
             {
 
@@ -263,4 +266,18 @@ while (true)
     }
 
     Console.WriteLine("\nPlease select another option.\n");
+
+
+
+    static void ShowSimplePercentage()
+    {
+        for (int i = 0; i <= 100; i++)
+        {
+            Console.Write($"\rProgress: {i} %  ");
+            Thread.Sleep(25);
+        }
+
+        
+    }
+    
 }
