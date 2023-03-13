@@ -2,6 +2,7 @@
 
 using MidtermGroupProject;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Numerics;
@@ -276,8 +277,12 @@ while (true)
             Console.Write($"\rProgress: {i} %  ");
             Thread.Sleep(25);
         }
-
-        
     }
-    
+
+    using (StreamWriter sw = File.CreateText(@"C:\Users\billy\BookList.txt"))
+
+        foreach (var s in BookList)
+        {
+            sw.WriteLine(s.Id + "||" + s.Title + "||" + s.Author + "||" + s.DueDate + "||" + s.Status);
+        }
 }
